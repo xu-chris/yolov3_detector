@@ -129,7 +129,8 @@ class YOLO(object):
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
-        font = ImageFont.truetype(font=os.path.abspath('font/FiraMono-Medium.otf'),
+        font_path = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/font/FiraMono-Medium.otf')
+        font = ImageFont.truetype(font=font_path,
                     size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
 
