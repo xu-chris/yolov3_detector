@@ -104,7 +104,6 @@ class YOLO(object):
 
     def detect_image(self, image):
         start = timer()
-        print("model image size: {}".format(self.model_image_size))
         if self.model_image_size != (None, None):
             assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
             assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
@@ -115,7 +114,6 @@ class YOLO(object):
             boxed_image = letterbox_image(image, new_image_size)
         image_data = np.array(boxed_image, dtype='float32')
 
-        print(image_data.shape)
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
 
@@ -126,8 +124,6 @@ class YOLO(object):
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
-
-        print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
 
         font_path = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + '/font/FiraMono-Medium.otf')
         font = ImageFont.truetype(font=font_path,
@@ -148,7 +144,6 @@ class YOLO(object):
             left = max(0, np.floor(left + 0.5).astype('int32'))
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
-            print(label, (left, top), (right, bottom))
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -167,7 +162,6 @@ class YOLO(object):
             del draw
 
         end = timer()
-        print(end - start)
         return image, out_boxes, out_scores, out_classes
 
     def close_session(self):
