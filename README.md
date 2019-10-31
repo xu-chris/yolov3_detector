@@ -1,6 +1,7 @@
 # YOLO v3 Detector engine
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/210550734.svg)](https://zenodo.org/badge/latestdoi/210550734)
 
 ## Introduction
 
@@ -114,7 +115,7 @@ yolo.close_session()
 
 #### Continuous input via Image Stream inside ROS
 
-This piece of code converts the image message from a ROS topic into a CV2 image and runs the detection within 
+This piece of code converts the image message from a ROS topic into a CV2 image and runs the detection within
 
 ```python
 import rospy
@@ -162,7 +163,7 @@ if __name__ == '__main__':
             r_image, out_boxes, out_scores, out_classes = yolo.detect_image(color_image)
             print('Got detection. Convert it to CV2 image format...')
             cv2_image = cv2.cvtColor(np.array(r_image), cv2.COLOR_RGB2BGR)
-            
+
             # Do here some other magic (like publish detection result)
 
         print('Closing YOLO session...')
